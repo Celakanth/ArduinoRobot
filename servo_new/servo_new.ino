@@ -1,7 +1,5 @@
 
 
-#include <IRLib.h>
-
 #include <Servo.h>
 #include <Wire.h>
 #include <SoftwareSerial.h>
@@ -17,7 +15,7 @@ SoftwareSerial BT(12, 13);
 /*-------------------------------------------------------------------------------------------------
    IR Remote controls
   ------------------------------------------------------------------------------------------------*/
-
+/*
 #define MY_PROTOCOL NEC
 #define RIGHT_ARROW 0x807F0AF5   //Move several clockwise
 #define LEFT_ARROW 0x807F8A75    //Move servo counterclockwise
@@ -42,7 +40,7 @@ SoftwareSerial BT(12, 13);
 #define BUTTON_7 0x807F629D
 #define BUTTON_8 0x807FA05F
 #define BUTTON_9 0x807F20DF
-
+*/
 #define trigPin1 9 //pin number 9 in arduino MEGA2560
 #define echoPin1 8
 
@@ -54,10 +52,10 @@ boolean DistinceTesting = false;
 boolean rundistanceservo = false;
 boolean spinServo = false;
 int ServoPos = 0;
-
+/*
 IRrecv myReceiver(22);
 IRdecode myDecoder;
-
+*/
 long duration, distance, UltraSensor1; //we'll use these variable to store and generate data
 //IRsend mySender;
 
@@ -73,7 +71,7 @@ long duration, distance, UltraSensor1; //we'll use these variable to store and g
    Motor controls
   ---------------------------------------------------------------------------------*/
 boolean Runmotors = false;
-unsigned int Buffer[RAWBUF];
+//unsigned int Buffer[RAWBUF];
 
 Servo LeftServo;
 Servo RightServo;
@@ -126,8 +124,8 @@ void setup()
   //LeftArm.attach(53);
   TurnServo.attach(38);
   DistanceServo.attach(36);
-  myReceiver.enableIRIn();
-  myDecoder.UseExtnBuf(Buffer);
+  //myReceiver.enableIRIn();
+  //myDecoder.UseExtnBuf(Buffer);
 
   pinMode(trigPin1, OUTPUT); // from where we will transmit the ultrasonic wave
   pinMode(echoPin1, INPUT);
@@ -135,11 +133,12 @@ void setup()
   myServos[2].write(0);
   currentLRPos[5] = 90;
 }
-
+int ReadingByte = 0;
 void loop()
 {
 
   BlueThooth();
+  serialCheck();
   // Drive each servo one at a time
   if (DistinceTesting)
   {
@@ -149,6 +148,17 @@ void loop()
   
 }
 
+
+void serialCheck()
+{
+  if(Serial.available() > 0){
+    
+    ReadingByte = Serial.read();
+    Serial.print("I have read ");
+    Serial.println(ReadingByte, DEC);
+  }  
+  
+}
 
 
 
