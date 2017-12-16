@@ -164,13 +164,13 @@ void serialCheck()
         if(RunningMode == 0){
           RunMotor();
           RunningMode = 1;
-          Runmotors = true
+          Runmotors = true;
           DistinceTesting = true;
         }
         else if(RunningMode == 1){
           ReverseMotor();
           RunningMode = 2;
-          Runmotors = true
+          Runmotors = true;
           DistinceTesting = false;
         }
         else if (RunningMode == 2){
