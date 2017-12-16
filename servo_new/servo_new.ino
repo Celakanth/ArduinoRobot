@@ -185,6 +185,7 @@ void serialCheck()
         Serial.print("Left Motor Foward at ");
         Serial.print(currentUDPos[0]);
         Serial.print(" Right Motor Foward at ");
+        Serial.println(currentUDPos[0]);
         RunMotor(currentUDPos[0],currentUDPos[1]);
         Runmotors = true;
         DistinceTesting = true;
@@ -308,17 +309,17 @@ void DistinceCheck()
   SonarSensor(trigPin1, echoPin1); // look bellow to find the difinition of the SonarSensor function
   UltraSensor1 = distance;         // store the distance in the first variable
 
-  while (Serial.available())
+  /*while (Serial.available())
   {
     delay(10);
     data = Serial.read();
     SerialData += data;
-  }
+  }*/
 
   Serial.print("distance measured by the first sensor: ");
   Serial.print(UltraSensor1);
   Serial.println(" cm");
-
+  delay(10);
   SerialData = "";
   // make condition to control the LEDs
   if (UltraSensor1 <= 6) // if distance is less than 10 Cm turn the LED ON
