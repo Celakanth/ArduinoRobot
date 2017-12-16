@@ -172,7 +172,7 @@ void serialCheck()
           currentUDPos[0] = currentUDPos[0] - 10;
           currentUDPos[1] = currentUDPos[1] + 10;
         }
-        else if(currentUDPos[0] == 150){
+        else if(currentUDPos[0] >= 150){
           iSPowerDown = true;
           currentUDPos[0] = currentUDPos[0] - 10;
           currentUDPos[1] = currentUDPos[1] + 10;
@@ -191,20 +191,21 @@ void serialCheck()
         DistinceTesting = true;
         break;
       case 98:
-        if(currentUDPos[0] < 87 && !iSPowerDown){
+        
+        if(currentUDPos[0] <=87 && currentUDPos[0] > 10 &&  !iSPowerDown){
           currentUDPos[0] = currentUDPos[0] - 10;
           currentUDPos[1] = currentUDPos[1] + 10;
         }
-        else if(currentUDPos[0] > 10 && iSPowerDown) {
+        else if(currentUDPos[0] < 80 && iSPowerDown) {
           currentUDPos[0] = currentUDPos[0] + 10;
           currentUDPos[1] = currentUDPos[1] - 10;
         }
-        else if(currentUDPos[0] == 10){
+        else if(currentUDPos[0] <= 10){
           iSPowerDown = true;
           currentUDPos[0] = currentUDPos[0] + 10;
           currentUDPos[1] = currentUDPos[1] - 10;
         }
-        else if(currentUDPos[0] < 90){
+        else if(currentUDPos[0] > 85){
           currentUDPos[0] = 87;
           currentUDPos[1] = 90;
           iSPowerDown = false;
@@ -219,6 +220,9 @@ void serialCheck()
         break;
       case 115:
         StopMotor();
+        iSPowerDown = false;
+        currentUDPos[0] = 87;
+        currentUDPos[1] = 90;
         Runmotors = false;
         DistinceTesting = false;
         break;
