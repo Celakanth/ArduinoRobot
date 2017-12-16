@@ -171,21 +171,21 @@ void serialCheck()
         currentUDPos[currentDevice] = 90;
         Serial.print("Setting Device ");
         Serial.println(data);
-        c = "";
+      
         break;
       case 52:
         currentDevice = 8;
         currentUDPos[currentDevice] = 90;
         Serial.print("Setting Device ");
         Serial.println(data);
-        c = "";
+        
         break;
       case 53:
         currentDevice = 9;
         currentUDPos[currentDevice] = 90;
         Serial.print("Setting Device ");
         Serial.println(data);
-        c = "";
+        
         break;
       //--------------------End Servo Selection ---------------------
 
