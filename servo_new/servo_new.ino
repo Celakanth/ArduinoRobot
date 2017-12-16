@@ -361,12 +361,12 @@ void BlueThooth()
     {
      
         if(RunningMode == 0){
-          RunMotor();
+          RunMotor(120,10);
           RunningMode = 1;
           distanceTest = true;
         }
         else if(RunningMode == 1){
-          ReverseMotor();
+          ReverseMotor(10,120);
           RunningMode = 2;
           distanceTest = false;
         }
