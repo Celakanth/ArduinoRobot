@@ -90,17 +90,17 @@ boolean isLeftArm = false;
 char data;
 String SerialData = "";
 char a; // stores incoming character from other device
-String allDevices[11] = {"Right Motor", "Left Motor", "Right Arm", "", "", "", "", "Left Shoulder", "Left Arm", "Right Shoulder"};
+String allDevices[11] = {"Left Motor","Right Motor", "Right Arm", "", "", "", "", "Left Shoulder", "Left Arm", "Right Shoulder"};
 int currentUDPos[11];
 int currentLRPos[11];
 int currentDevice = 0;
 int RunningMode = 0;
+int LeftMotorStop = 87;
+int RightMotorStop = 90;
+bool iSPowerDown = false;
 
 Servo myServos[11];
-/*Servo LeftArm;
-Servo LeftShoulder;
-Servo RightArm;
-Servo RightShoulder;*/
+
 Servo DistanceServo;
 Servo TurnServo;
 
@@ -116,16 +116,18 @@ void setup()
   myServos[9].attach(43); //Right Shoulder Servo
   myServos[8].attach(53); //Left arm servo
   myServos[7].attach(52); //Left Shoulder Servo
-  //RightServo.attach(28);
-  //LeftServo.attach(26);
-  //RightArm.attach(42);
-  //LeftShoulder.attach(52);
-  //RightShoulder.attach(43);
-  //LeftArm.attach(53);
+ 
   TurnServo.attach(38);
   DistanceServo.attach(36);
-  //myReceiver.enableIRIn();
-  //myDecoder.UseExtnBuf(Buffer);
+
+  currentUDPos[0] = LeftMotorStop;
+  currentUDPos[1] = RightMotorStop;
+
+   currentUDPos[2] = 0;
+   currentUDPos[9] = 90;
+   currentUDPos[8] = 90;
+   currentUDPos[7] = 90;
+  
 
   pinMode(trigPin1, OUTPUT); // from where we will transmit the ultrasonic wave
   pinMode(echoPin1, INPUT);
@@ -160,52 +162,80 @@ void serialCheck()
     switch(ReadingByte)
     {
       //---------------Run Motors ----------------------
-      case 49:
-        if(RunningMode == 0){
-          RunMotor();
-          RunningMode = 1;
-          Runmotors = true;
-          DistinceTesting = true;
+      case 102:
+        if(currentUDPos[0] < 150 && !iSPowerDown){
+          currentUDPos[0] = currentUDPos[0] + 10;
+          currentUDPos[1] = currentUDPos[1] - 10;
         }
-        else if(RunningMode == 1){
-          ReverseMotor();
-          RunningMode = 2;
-          Runmotors = true;
-          DistinceTesting = false;
+        else if(currentUDPos[0] > 87 && iSPowerDown) {
+          currentUDPos[0] = currentUDPos[0] - 10;
+          currentUDPos[1] = currentUDPos[1] + 10;
         }
-        else if (RunningMode == 2){
-          StopMotor();
-          RunningMode = 0;
-          Runmotors = false;
-          DistinceTesting = false;
+        else if(currentUDPos[0] == 150){
+          iSPowerDown = true;
+          currentUDPos[0] = currentUDPos[0] - 10;
+          currentUDPos[1] = currentUDPos[1] + 10;
         }
-        Serial.print("Motors are running ");
-        Serial.println(RunningMode);
+        else if(currentUDPos[0] < 90){
+          currentUDPos[0] = 87;
+          currentUDPos[1] = 90;
+          iSPowerDown = false;
+        }
+        RunMotor(currentUDPos[0],currentUDPos[1]);
+        Runmotors = true;
+        DistinceTesting = true;
+        break;
+      case 98:
+        if(currentUDPos[0] < 87 && !iSPowerDown){
+          currentUDPos[0] = currentUDPos[0] - 10;
+          currentUDPos[1] = currentUDPos[1] + 10;
+        }
+        else if(currentUDPos[0] > 10 && iSPowerDown) {
+          currentUDPos[0] = currentUDPos[0] + 10;
+          currentUDPos[1] = currentUDPos[1] - 10;
+        }
+        else if(currentUDPos[0] == 10){
+          iSPowerDown = true;
+          currentUDPos[0] = currentUDPos[0] + 10;
+          currentUDPos[1] = currentUDPos[1] - 10;
+        }
+        else if(currentUDPos[0] < 90){
+          currentUDPos[0] = 87;
+          currentUDPos[1] = 90;
+          iSPowerDown = false;
+        }
+        ReverseMotor(currentUDPos[0],currentUDPos[1]);
+        Runmotors = true;
+        DistinceTesting = false;
+        break;
+      case 115:
+        StopMotor();
+        Runmotors = false;
+        DistinceTesting = false;
+        break;
+      case 107:
+        exit(0);
         break;
       //---------------Servo Selection -----------------
       case 50:
         currentDevice = 2;
-        currentUDPos[currentDevice] = 90;
         Serial.print("Setting Device ");
         Serial.println(allDevices[2]);
         break;
       case 53:
         currentDevice = 7;
-        currentUDPos[currentDevice] = 90;
-        Serial.print("Setting Device ");
+       Serial.print("Setting Device ");
         Serial.println(allDevices[7]);
       
         break;
       case 52:
         currentDevice = 8;
-        currentUDPos[currentDevice] = 90;
         Serial.print("Setting Device ");
         Serial.println(allDevices[8]);
         
         break;
       case 51:
         currentDevice = 9;
-        currentUDPos[currentDevice] = 90;
         Serial.print("Setting Device ");
         Serial.println(allDevices[9]);
         
@@ -215,22 +245,26 @@ void serialCheck()
       //--------------------Set Servo pasition -------------------------
       case 117:
         currentUDPos[currentDevice] = currentUDPos[currentDevice] + 10;
-        Serial.print("Rolling Servo on Pin ");
+        Serial.print("Rolling Servo on Device ");
         Serial.println(currentDevice);
         myServos[currentDevice].write(currentUDPos[currentDevice]);
         break;
       case 100:
         currentUDPos[currentDevice] = currentUDPos[currentDevice] - 10;
-        Serial.print("Rolling Servo on Pin ");
+        Serial.print("Rolling Servo on Device ");
         Serial.println(currentDevice);
         myServos[currentDevice].write(currentUDPos[currentDevice]);
         break;
 
         case 108:
+          Serial.print("Turning Left ");
+          Serial.println(currentLRPos[5]);
           currentLRPos[5] = currentLRPos[5] + 10;
           TurnServo.write(currentLRPos[5]);
           break;
         case 114:
+          Serial.print("Turning Right ");
+          Serial.println(currentLRPos[5]);
           currentLRPos[5] = currentLRPos[5] - 10;
           TurnServo.write(currentLRPos[5]);
           break;
@@ -243,16 +277,16 @@ void serialCheck()
 
 
 
-void RunMotor()
+void RunMotor(int LPower, int RPower)
 {
-  myServos[0].write(120); //Left running motor
-  myServos[1].write(10); //Right running motor
+  myServos[0].write(LPower); //Left running motor full foward = 120 all stop = 87
+  myServos[1].write(RPower); //Right running motor full foward = 10 all stop = 90
 }
 
-void ReverseMotor()
+void ReverseMotor(int LPower, int RPower)
 {
-  myServos[0].write(10); //Left running motor
-  myServos[1].write(120); //Right running motor
+  myServos[0].write(LPower); //Left running motor full reverse = 10
+  myServos[1].write(RPower); //Right running motor full reverse = 120
 }
 
 void StopMotor()
