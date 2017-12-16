@@ -159,39 +159,68 @@ void serialCheck()
 
     switch(ReadingByte)
     {
+      //---------------Run Motors ----------------------
+      case 49:
+        if(RunningMode == 0){
+          RunMotor();
+          RunningMode = 1;
+          Runmotors = true
+          DistinceTesting = true;
+        }
+        else if(RunningMode == 1){
+          ReverseMotor();
+          RunningMode = 2;
+          Runmotors = true
+          DistinceTesting = false;
+        }
+        else if (RunningMode == 2){
+          StopMotor();
+          RunningMode = 0;
+          Runmotors = false;
+          DistinceTesting = false;
+        }
+        Serial.print("Motors are running ");
+        Serial.println(RunningMode);
+        break;
       //---------------Servo Selection -----------------
       case 50:
         currentDevice = 2;
         currentUDPos[currentDevice] = 90;
         Serial.print("Setting Device ");
-        Serial.println(data);
+        Serial.println(allDevices[2]);
         break;
       case 51:
         currentDevice = 7;
         currentUDPos[currentDevice] = 90;
         Serial.print("Setting Device ");
-        Serial.println(data);
+        Serial.println(allDevices[7]);
       
         break;
       case 52:
         currentDevice = 8;
         currentUDPos[currentDevice] = 90;
         Serial.print("Setting Device ");
-        Serial.println(data);
+        Serial.println(allDevices[8]);
         
         break;
       case 53:
         currentDevice = 9;
         currentUDPos[currentDevice] = 90;
         Serial.print("Setting Device ");
-        Serial.println(data);
+        Serial.println(allDevices[9]);
         
         break;
       //--------------------End Servo Selection ---------------------
 
       //--------------------Set Servo pasition -------------------------
-      case 102:
+      case 117:
         currentUDPos[currentDevice] = currentUDPos[currentDevice] + 10;
+        Serial.print("Rolling Servo on Pin ");
+        Serial.println(currentDevice);
+        myServos[currentDevice].write(currentUDPos[currentDevice]);
+        break;
+      case 100:
+        currentUDPos[currentDevice] = currentUDPos[currentDevice] - 10;
         Serial.print("Rolling Servo on Pin ");
         Serial.println(currentDevice);
         myServos[currentDevice].write(currentUDPos[currentDevice]);
