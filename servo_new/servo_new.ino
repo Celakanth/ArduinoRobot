@@ -166,6 +166,7 @@ void serialCheck()
         if(currentUDPos[0] < 150 && !iSPowerDown){
           currentUDPos[0] = currentUDPos[0] + 10;
           currentUDPos[1] = currentUDPos[1] - 10;
+          
         }
         else if(currentUDPos[0] > 87 && iSPowerDown) {
           currentUDPos[0] = currentUDPos[0] - 10;
@@ -181,6 +182,9 @@ void serialCheck()
           currentUDPos[1] = 90;
           iSPowerDown = false;
         }
+        Serial.print("Left Motor Foward at ");
+        Serial.print(currentUDPos[0]);
+        Serial.print(" Right Motor Foward at ");
         RunMotor(currentUDPos[0],currentUDPos[1]);
         Runmotors = true;
         DistinceTesting = true;
@@ -204,6 +208,10 @@ void serialCheck()
           currentUDPos[1] = 90;
           iSPowerDown = false;
         }
+        Serial.print("Left Motor Backward at ");
+        Serial.print(currentUDPos[0]);
+        Serial.print(" Right Motor Backward at ");
+        Serial.println(currentUDPos[1]);
         ReverseMotor(currentUDPos[0],currentUDPos[1]);
         Runmotors = true;
         DistinceTesting = false;
