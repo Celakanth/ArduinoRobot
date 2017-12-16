@@ -156,6 +156,16 @@ void serialCheck()
     ReadingByte = Serial.read();
     Serial.print("I have read ");
     Serial.println(ReadingByte, DEC);
+
+    switch(ReadingByte)
+    {
+      case 50:
+        currentDevice = 2;
+        currentUDPos[currentDevice] = 90;
+        Serial.print("Setting Device ");
+        Serial.println(data);
+        break;
+    }
   }  
   
 }
