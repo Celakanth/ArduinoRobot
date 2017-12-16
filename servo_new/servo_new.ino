@@ -159,12 +159,44 @@ void serialCheck()
 
     switch(ReadingByte)
     {
+      //---------------Servo Selection -----------------
       case 50:
         currentDevice = 2;
         currentUDPos[currentDevice] = 90;
         Serial.print("Setting Device ");
         Serial.println(data);
         break;
+      case 51:
+        currentDevice = 7;
+        currentUDPos[currentDevice] = 90;
+        Serial.print("Setting Device ");
+        Serial.println(data);
+        c = "";
+        break;
+      case 52:
+        currentDevice = 8;
+        currentUDPos[currentDevice] = 90;
+        Serial.print("Setting Device ");
+        Serial.println(data);
+        c = "";
+        break;
+      case 53:
+        currentDevice = 9;
+        currentUDPos[currentDevice] = 90;
+        Serial.print("Setting Device ");
+        Serial.println(data);
+        c = "";
+        break;
+      //--------------------End Servo Selection ---------------------
+
+      //--------------------Set Servo pasition -------------------------
+      case 102:
+        currentUDPos[currentDevice] = currentUDPos[currentDevice] + 10;
+        Serial.print("Rolling Servo on Pin ");
+        Serial.println(currentDevice);
+        myServos[currentDevice].write(currentUDPos[currentDevice]);
+        break;
+      //---------------------End Set pasition -----------------------
     }
   }  
   
