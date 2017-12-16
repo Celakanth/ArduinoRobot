@@ -189,7 +189,7 @@ void serialCheck()
         Serial.print("Setting Device ");
         Serial.println(allDevices[2]);
         break;
-      case 51:
+      case 53:
         currentDevice = 7;
         currentUDPos[currentDevice] = 90;
         Serial.print("Setting Device ");
@@ -203,7 +203,7 @@ void serialCheck()
         Serial.println(allDevices[8]);
         
         break;
-      case 53:
+      case 51:
         currentDevice = 9;
         currentUDPos[currentDevice] = 90;
         Serial.print("Setting Device ");
@@ -225,6 +225,16 @@ void serialCheck()
         Serial.println(currentDevice);
         myServos[currentDevice].write(currentUDPos[currentDevice]);
         break;
+
+        case 108:
+          currentLRPos[5] = currentLRPos[5] + 10;
+          TurnServo.write(currentLRPos[5]);
+          break;
+        case 114:
+          currentLRPos[5] = currentLRPos[5] - 10;
+          TurnServo.write(currentLRPos[5]);
+          break;
+
       //---------------------End Set pasition -----------------------
     }
   }  
