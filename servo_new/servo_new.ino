@@ -185,7 +185,7 @@ void serialCheck()
         Serial.print("Left Motor Foward at ");
         Serial.print(currentUDPos[0]);
         Serial.print(" Right Motor Foward at ");
-        Serial.println(currentUDPos[0]);
+        Serial.println(currentUDPos[1]);
         RunMotor(currentUDPos[0],currentUDPos[1]);
         Runmotors = true;
         DistinceTesting = true;
@@ -316,9 +316,10 @@ void DistinceCheck()
     SerialData += data;
   }*/
 
-  Serial.print("distance measured by the first sensor: ");
+  /*Serial.print("distance measured by the first sensor: ");
   Serial.print(UltraSensor1);
-  Serial.println(" cm");
+  Serial.println(" cm");*/
+
   delay(10);
   SerialData = "";
   // make condition to control the LEDs
@@ -326,7 +327,7 @@ void DistinceCheck()
   {
     StopMotor();
     DistinceTesting = false;
-   
+    Serial.println("Too close stopping Motors");
   }
   else // else turn the LED OFF
   {
