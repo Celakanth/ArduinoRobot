@@ -84,13 +84,15 @@ int LeftArmPos = 90;
 int RightArmPos = 90;
 int LeftShoulderPos = 90;
 int RightShoulderPos = 90;
+int RightHandPos = 0;
+int LeftHandPos = 0;
 
 boolean isLeftArm = false;
 
 char data;
 String SerialData = "";
 char a; // stores incoming character from other device
-String allDevices[11] = {"Left Motor","Right Motor", "Right Arm", "", "", "", "", "Left Shoulder", "Left Arm", "Right Shoulder"};
+String allDevices[11] = {"Left Motor","Right Motor", "Right Arm", "Right Hand", "Left Hand", "", "", "Left Shoulder", "Left Arm", "Right Shoulder"};
 int currentUDPos[11];
 int currentLRPos[11];
 int currentDevice = 0;
@@ -116,6 +118,8 @@ void setup()
   myServos[9].attach(43); //Right Shoulder Servo
   myServos[8].attach(53); //Left arm servo
   myServos[7].attach(52); //Left Shoulder Servo
+  myServos[3].attach(35); //Right Hand Servo
+  myServos[4].attach(32); //Left Hand Servo
  
   TurnServo.attach(38);
   DistanceServo.attach(36);
