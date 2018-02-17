@@ -128,8 +128,8 @@ void setup()
   currentUDPos[1] = RightMotorStop;
 
    currentUDPos[2] = 0;
-   currentUDPos[3] = 0;
-   currentUDPos[4] = 90;
+   currentUDPos[3] = 90;
+   currentUDPos[4] = 180;
    currentUDPos[9] = 90;
    currentUDPos[8] = 90;
    currentUDPos[7] = 90;
