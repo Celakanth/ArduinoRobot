@@ -128,7 +128,7 @@ void setup()
   currentUDPos[1] = RightMotorStop;
 
    currentUDPos[2] = 0;
-   currentUDPos[3] = 90;
+   currentUDPos[3] = 180;
    currentUDPos[4] = 180;
    currentUDPos[9] = 90;
    currentUDPos[8] = 90;
@@ -226,7 +226,7 @@ void serialCheck()
         break;
       //Open Hand
       case 111:
-        currentUDPos[currentDevice] = currentUDPos[currentDevice] + 10;
+        currentUDPos[currentDevice] = currentUDPos[currentDevice] - 10;
         Serial.print("Opening Hand ");
         Serial.println(currentDevice);
         myServos[currentDevice].write(currentUDPos[currentDevice]);
@@ -245,7 +245,7 @@ void serialCheck()
         break;
 
       case 99:
-        currentUDPos[currentDevice] = currentUDPos[currentDevice] - 10;
+        currentUDPos[currentDevice] = currentUDPos[currentDevice] + 10;
         Serial.print("Closing Hand ");
         Serial.println(currentDevice);
         myServos[currentDevice].write(currentUDPos[currentDevice]);
