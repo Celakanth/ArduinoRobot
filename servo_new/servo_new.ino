@@ -134,6 +134,9 @@ void setup()
    currentUDPos[8] = 90;
    currentUDPos[7] = 90;
   
+    myServos[3].write(currentUDPos[3]); //Left Hand Servo
+    myServos[4].write( currentUDPos[4]); //Right Hand Servo
+
 
   pinMode(trigPin1, OUTPUT); // from where we will transmit the ultrasonic wave
   pinMode(echoPin1, INPUT);
