@@ -118,8 +118,8 @@ void setup()
   myServos[9].attach(43); //Right Shoulder Servo
   myServos[8].attach(53); //Left arm servo
   myServos[7].attach(52); //Left Shoulder Servo
-  myServos[3].attach(35); //Right Hand Servo
-  myServos[4].attach(32); //Left Hand Servo
+  myServos[3].attach(35); //Left Hand Servo
+  myServos[4].attach(34); //Right Hand Servo
  
   TurnServo.attach(38);
   DistanceServo.attach(36);
@@ -128,6 +128,8 @@ void setup()
   currentUDPos[1] = RightMotorStop;
 
    currentUDPos[2] = 0;
+   currentUDPos[3] = 0;
+   currentUDPos[4] = 0;
    currentUDPos[9] = 90;
    currentUDPos[8] = 90;
    currentUDPos[7] = 90;
