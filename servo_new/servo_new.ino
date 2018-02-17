@@ -222,6 +222,14 @@ void serialCheck()
         Runmotors = true;
         DistinceTesting = false;
         break;
+      //Open Hand
+      case 111:
+        currentUDPos[currentDevice] = currentUDPos[currentDevice] + 10;
+        Serial.print("Opening Hand ");
+        Serial.println(currentDevice);
+        myServos[currentDevice].write(currentUDPos[currentDevice]);
+        break;
+        
       case 115:
         StopMotor();
         iSPowerDown = false;
@@ -233,11 +241,28 @@ void serialCheck()
       case 107:
         exit(0);
         break;
+
+      case 99:
+        currentUDPos[currentDevice] = currentUDPos[currentDevice] - 10;
+        Serial.print("Opening Hand ");
+        Serial.println(currentDevice);
+        myServos[currentDevice].write(currentUDPos[currentDevice]);
+        break;
       //---------------Servo Selection -----------------
       case 50:
         currentDevice = 2;
         Serial.print("Setting Device ");
         Serial.println(allDevices[2]);
+        break;
+      case 104:
+        currentDevice = 3;
+        Serial.print("Setting Device");
+        Serial.print(allDevices[3]);
+        break;
+      case 106:
+        currentDevice = 4;
+        Serial.print("Setting Device");
+        Serial.print(allDevices[4]);
         break;
       case 53:
         currentDevice = 7;
@@ -272,13 +297,14 @@ void serialCheck()
         Serial.println(currentDevice);
         myServos[currentDevice].write(currentUDPos[currentDevice]);
         break;
-
+        //Turn Left
         case 108:
           Serial.print("Turning Left ");
           Serial.println(currentLRPos[5]);
           currentLRPos[5] = currentLRPos[5] + 10;
           TurnServo.write(currentLRPos[5]);
           break;
+        //Turn right
         case 114:
           Serial.print("Turning Right ");
           Serial.println(currentLRPos[5]);
