@@ -118,8 +118,8 @@ void setup()
   myServos[9].attach(43); //Right Shoulder Servo
   myServos[8].attach(53); //Left arm servo
   myServos[7].attach(52); //Left Shoulder Servo
-  myServos[3].attach(35); //Left Hand Servo
-  myServos[4].attach(34); //Right Hand Servo
+  myServos[3].attach(33); //Left Hand Servo
+  myServos[4].attach(32); //Right Hand Servo
  
   TurnServo.attach(38);
   DistanceServo.attach(36);
@@ -246,7 +246,7 @@ void serialCheck()
 
       case 99:
         currentUDPos[currentDevice] = currentUDPos[currentDevice] - 10;
-        Serial.print("Opening Hand ");
+        Serial.print("Closing Hand ");
         Serial.println(currentDevice);
         myServos[currentDevice].write(currentUDPos[currentDevice]);
         break;
