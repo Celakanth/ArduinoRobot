@@ -135,7 +135,7 @@ void setup()
    currentUDPos[2] = 0;
    currentUDPos[3] = 180;
    currentUDPos[4] = 180;
-   currentUDPos[5] = 90
+   currentUDPos[5] = 90;
    currentLRPos[6] = 90;
    currentUDPos[9] = 90;
    currentUDPos[8] = 90;
