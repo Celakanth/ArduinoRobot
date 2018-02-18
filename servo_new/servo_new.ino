@@ -257,7 +257,7 @@ void serialCheck()
         Serial.println(allDevices[5]);
         break;
       
-      case 118:
+      case 120:
         currentDevice = 6;
         Serial.print("Setting Device ");
         Serial.println(allDevices[6]);
