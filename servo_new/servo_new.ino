@@ -86,6 +86,8 @@ int LeftShoulderPos = 90;
 int RightShoulderPos = 90;
 int RightHandPos = 0;
 int LeftHandPos = 0;
+int LRCameraPos = 90;
+int UDCameraPos = 90;
 
 boolean isLeftArm = false;
 
@@ -120,6 +122,9 @@ void setup()
   myServos[7].attach(52); //Left Shoulder Servo
   myServos[3].attach(33); //Left Hand Servo
   myServos[4].attach(32); //Right Hand Servo
+  myServos[5].attach(22); //Camer Up and Down
+  myServos[6].attach(23); //Camera Left and Right
+
  
   TurnServo.attach(38);
   DistanceServo.attach(36);
@@ -130,6 +135,8 @@ void setup()
    currentUDPos[2] = 0;
    currentUDPos[3] = 180;
    currentUDPos[4] = 180;
+   currentUDPos[5] = 90
+   currentLRPos[6] = 90;
    currentUDPos[9] = 90;
    currentUDPos[8] = 90;
    currentUDPos[7] = 90;
@@ -243,6 +250,19 @@ void serialCheck()
         Runmotors = false;
         DistinceTesting = false;
         break;
+
+      case 118:
+        currentDevice = 5;
+        Serial.print("Setting Device ");
+        Serial.println(allDevices[5]);
+        break;
+      
+      case 118:
+        currentDevice = 6;
+        Serial.print("Setting Device ");
+        Serial.println(allDevices[6]);
+        break;
+
       case 107:
         exit(0);
         break;
@@ -339,7 +359,7 @@ void ReverseMotor(int LPower, int RPower)
 
 void StopMotor()
 {
-  myServos[0].write(87);
+  myServos[0].write(90);
   myServos[1].write(90);
 }
 
