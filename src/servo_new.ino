@@ -352,7 +352,7 @@ void serialCheck()
       Serial.print("In coby actions");
       AllValues = Serial.readString();
       //AllValues = AllValues + ReadingByte;
-      Serial.print(AllValues);
+      Serial.println(AllValues);
     }
   }  
   
