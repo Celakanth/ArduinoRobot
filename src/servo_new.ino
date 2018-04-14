@@ -350,7 +350,8 @@ void serialCheck()
     }
     else{
       Serial.print("In coby actions");
-      AllValues = AllValues + ReadingByte;
+      AllValues = Serial.readString();
+      //AllValues = AllValues + ReadingByte;
       Serial.print(AllValues);
     }
   }  
