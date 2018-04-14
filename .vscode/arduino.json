@@ -1,6 +1,6 @@
 {
     "board": "arduino:avr:mega",
-    "configuration": "cpu=atmega2560",
+    "configuration": "cpu=atmega1280",
     "sketch": "src\\servo_new.ino",
     "port": "COM1",
     "output": "D:\\ArudinoBuilds\\"
