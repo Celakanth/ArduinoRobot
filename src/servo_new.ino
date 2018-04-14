@@ -335,8 +335,13 @@ void serialCheck()
           TurnServo.write(currentLRPos[5]);
           break;
 
+        //Alexa overide
+        case 42:
+          break;  
+
       //---------------------End Set pasition -----------------------
     }
+
   }  
   
 }
@@ -392,6 +397,41 @@ void DistinceCheck()
     
   }
 }
+
+//New Methoud for alexa to use
+
+void alexaRun(string device, string direction,int degree)
+{
+  if(device == "forward"){
+      RunMotor(120,10);
+      break;
+      }
+      else if(device == "backward"){
+        RunMotor(10,120);
+        break;
+      }
+      else if(device == "stop"){
+        StopMotor();
+      }
+      else if(device == "rightarm"){
+        myServos[2].write(degree);
+        break;
+      }
+      else if(device == "leftarm"){
+        myServos[8].write(degree);
+        break;
+      }
+      else if(device == "rightshoulder"){
+        myServos[9].write(degree);
+        break;
+      }
+      else if(device == "leftshoulder"){
+        myServos[7].write(degree);
+        break;
+      }
+}
+
+
 
 // SonarSensor function used to generate and read the ultrasonic wave
 void SonarSensor(int trigPinSensor, int echoPinSensor) //it takes the trigPIN and the echoPIN
