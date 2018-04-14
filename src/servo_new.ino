@@ -353,6 +353,10 @@ void serialCheck()
       AllValues = Serial.readString();
       //AllValues = AllValues + ReadingByte;
       Serial.print(AllValues);
+      if(AllValues == "exit"){
+        AlexaInUse = false;
+        Serial.println("Coby is deactive");
+      }
     }
   }  
   
