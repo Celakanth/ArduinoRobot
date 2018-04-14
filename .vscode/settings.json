@@ -1,3 +1,10 @@
 {
-    "C_Cpp.intelliSenseEngineFallback": "Enabled"
+    "C_Cpp.intelliSenseEngineFallback": "Enabled",
+    "editor.tokenColorCustomizations": {
+        "variables": "#4245f0",
+        "functions": "#79a2fa",
+        "comments": "#0e5c26",
+        "keywords": "#b64545"
+    }
+    
 }
