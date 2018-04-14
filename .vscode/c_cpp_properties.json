@@ -78,5 +78,6 @@
             "cppStandard": "c++17"
         }
     ],
-    "version": 3
+    "version": 3,
+    "C_Cpp.intelliSenseEngine": "Tag Parser"
 }
