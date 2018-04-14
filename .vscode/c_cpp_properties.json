@@ -51,7 +51,8 @@
                 "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/shared",
                 "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/winrt",
                 "D:/Development/ArduinoRobot/lib/",
-                "D:/Development/ArduinoRobot/lib/SoftwareServo"
+                "D:/Development/ArduinoRobot/lib/SoftwareServo",
+                "C:\\Program Files\\WindowsApps\\ArduinoLLC.ArduinoIDE_1.8.10.0_x86__mdqgnx93n4wtt\\hardware\\arduino\\avr\\cores\\arduino"
             ],
             "defines": [
                 "_DEBUG",
@@ -67,9 +68,10 @@
                     "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/shared",
                     "C:/Program Files (x86)/Windows Kits/10/Include/10.0.16299.0/winrt",
                     "D:/Development/ArduinoRobot/lib/",
-                    "D:/Development/ArduinoRobot/lib/SoftwareServo"
+                    "D:/Development/ArduinoRobot/lib/SoftwareServo",
+                    "C:\\Program Files\\WindowsApps\\ArduinoLLC.ArduinoIDE_1.8.10.0_x86__mdqgnx93n4wtt\\hardware\\arduino\\avr\\cores\\arduino"
                 ],
-                "limitSymbolsToIncludedHeaders": true,
+                "limitSymbolsToIncludedHeaders": false,
                 "databaseFilename": ""
             },
             "cStandard": "c11",
