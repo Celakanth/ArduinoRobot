@@ -340,9 +340,10 @@ void serialCheck()
           //Alexa overide
           case 42:
             AlexaInUse = true;
-            break;  
-  
-        //---------------------End Set pasition -----------------------
+            serial.print("Coby is active");
+            break;
+
+            //---------------------End Set pasition -----------------------
       }
     }
     else{
