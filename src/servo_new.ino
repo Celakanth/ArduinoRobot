@@ -42,6 +42,8 @@ SoftwareSerial BT(12, 13);
 #define trigPin1 9 //pin number 9 in arduino MEGA2560
 #define echoPin1 8
 
+bool AlexaInUse = false;
+
 int REC_PIN = 2;
 
 boolean distanceTest = false;
@@ -172,7 +174,7 @@ void serialCheck()
     ReadingByte = Serial.read();
     Serial.print("I have read ");
     Serial.println(ReadingByte, DEC);
-
+    if(!AlexaInUse){
     switch(ReadingByte)
     {
       //---------------Run Motors ----------------------
@@ -337,9 +339,13 @@ void serialCheck()
 
         //Alexa overide
         case 42:
+          AlexaInUse = true;
           break;  
 
       //---------------------End Set pasition -----------------------
+    }
+    else{
+
     }
 
   }  
