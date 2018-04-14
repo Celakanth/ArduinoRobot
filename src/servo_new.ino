@@ -52,6 +52,7 @@ boolean DistinceTesting = false;
 boolean rundistanceservo = false;
 boolean spinServo = false;
 int ServoPos = 0;
+String AllValues = "";
 /*
 IRrecv myReceiver(22);
 IRdecode myDecoder;
@@ -174,6 +175,7 @@ void serialCheck()
       ReadingByte = Serial.read();
       Serial.print("I have read ");
       Serial.println(ReadingByte, DEC);
+      
       if(!AlexaInUse){
       switch(ReadingByte)
       {
@@ -340,16 +342,16 @@ void serialCheck()
           //Alexa overide
           case 42:
             AlexaInUse = true;
-            serial.print("Coby is active");
+            Serial.print("Coby is active");
             break;
 
             //---------------------End Set pasition -----------------------
       }
     }
     else{
-
+      Serial.print("In coby actions");
+      AllValues = AllValues + ReadingByte;
     }
-
   }  
   
 }
