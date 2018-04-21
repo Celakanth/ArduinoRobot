@@ -358,9 +358,9 @@ void serialCheck()
         Serial.println("Coby is deactive");
       }
       else{
-        String TheCommands = AllValues.Split('|');
+        String[] TheCommands = AllValues.Split('|');
         if(TheCommands.length > 1){
-          alexaRun(TheCommands[0], "",TheCommands[1])
+          alexaRun(TheCommands[0], "", TheCommands[1].toInt());
         }
       }
     }
