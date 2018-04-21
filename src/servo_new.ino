@@ -358,10 +358,13 @@ void serialCheck()
         Serial.println("Coby is deactive");
       }
       else{
-        String[] TheCommands = AllValues.Split('|');
-        if(TheCommands.length > 1){
-          alexaRun(TheCommands[0], "", TheCommands[1].toInt());
-        }
+        int TheSeporator = AllValues.IndexOf("|");
+        String[] TheCommands = new String[2];
+        TheCommands[0] = AllValues.Substring(0,TheSeporator + 1);
+        TheCommands[1] = AllValues.Substring(TheSeporator, AllValues.Length);
+        Serial.print(TheCommands[0] + " " TheCommands[1]);
+        alexaRun(TheCommands[0], "", TheCommands[1].toInt());
+        
       }
     }
   }  
