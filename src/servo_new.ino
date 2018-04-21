@@ -359,7 +359,7 @@ void serialCheck()
       }
       else{
         int TheSeporator = AllValues.indexOf("|");
-        String TheCommands[2];
+        char TheCommands[2];
         TheCommands[0] = AllValues.substring(0,TheSeporator + 1);
         TheCommands[1] = AllValues.substring(TheSeporator, AllValues.length());
         Serial.print(TheCommands[0] + " " + TheCommands[1]);
