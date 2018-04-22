@@ -459,10 +459,10 @@ void alexaRun(String device, String direction,int degree){
         hasReadData = true;
       }
       if(hasReadData){
-        Serial.print("I have moved " + device + " " + degree + " degrees");
+        Serial.print("success");
       }
       else{
-        Serial.print("Bad data has been received");
+        Serial.print("error");
       }
 }
 
