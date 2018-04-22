@@ -171,12 +171,12 @@ void loop()
 void serialCheck()
 {
   if(Serial.available() > 0){
-      
+      if(!AlexaInUse){
       ReadingByte = Serial.read();
       Serial.print("I have read ");
       Serial.println(ReadingByte, DEC);
       
-      if(!AlexaInUse){
+      
       switch(ReadingByte)
       {
         //---------------Run Motors ----------------------
