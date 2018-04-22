@@ -10,8 +10,6 @@ SoftwareSerial BT(12, 13);
 // connect BT module RX to D11
 // connect BT Vcc to 5V, GND to GND
 
-//hello
-
 /*-------------------------------------------------------------------------------------------------
    IR Remote controls
   ------------------------------------------------------------------------------------------------*/
@@ -54,6 +52,7 @@ boolean DistinceTesting = false;
 boolean rundistanceservo = false;
 boolean spinServo = false;
 int ServoPos = 0;
+String AllValues = "";
 /*
 IRrecv myReceiver(22);
 IRdecode myDecoder;
@@ -176,6 +175,7 @@ void serialCheck()
       ReadingByte = Serial.read();
       Serial.print("I have read ");
       Serial.println(ReadingByte, DEC);
+      
       if(!AlexaInUse){
       switch(ReadingByte)
       {
@@ -342,15 +342,32 @@ void serialCheck()
           //Alexa overide
           case 42:
             AlexaInUse = true;
-            break;  
-  
-        //---------------------End Set pasition -----------------------
+            Serial.print("Coby is active");
+            break;
+
+            //---------------------End Set pasition -----------------------
       }
     }
     else{
-
+      Serial.println("In coby actions");
+      AllValues = Serial.readString();
+      //AllValues = AllValues + ReadingByte;
+      Serial.print(AllValues);
+      if(AllValues == "exit"){
+        AlexaInUse = false;
+        Serial.println("Coby is deactive");
+      }
+      else{
+        int TheSeporator = AllValues.indexOf("|");
+        String TheDevice = "";
+        int TheDegrees = 0;
+        TheDevice = AllValues.substring(0,TheSeporator + 1);
+        TheDegrees = AllValues.substring(TheSeporator, AllValues.length()).toInt();
+        Serial.print(TheDevice + " " + String(TheDegrees));
+        alexaRun(TheDevice, "", TheDegrees);
+        
+      }
     }
-
   }  
   
 }

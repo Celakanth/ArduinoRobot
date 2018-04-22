@@ -358,12 +358,13 @@ void serialCheck()
         Serial.println("Coby is deactive");
       }
       else{
-        int TheSeporator = AllValues.indexOf("|");
-        char TheCommands[2];
-        TheCommands[0] = AllValues.substring(0,TheSeporator + 1);
-        TheCommands[1] = AllValues.substring(TheSeporator, AllValues.length());
-        Serial.print(TheCommands[0] + " " + TheCommands[1]);
-        alexaRun(TheCommands[0], "", ((int)TheCommands[1]));
+       int TheSeporator = AllValues.indexOf("|");
+        String TheDevice = "";
+        int TheDegrees = 0;
+        TheDevice = AllValues.substring(0,TheSeporator + 1);
+        TheDegrees = AllValues.substring(TheSeporator, AllValues.length()).toInt();
+        Serial.print(TheDevice + " " + String(TheDegrees));
+        alexaRun(TheDevice, "", TheDegrees);
         
       }
     }
