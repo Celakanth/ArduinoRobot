@@ -455,7 +455,7 @@ void alexaRun(String device, String direction,int degree){
         myServos[7].write(degree);
         
       }
-      Serial.print("I have moved " + device + " " + degree + " degrees");
+      Serial.println("I have moved " + device + " " + degree + " degrees");
 }
 
 // SonarSensor function used to generate and read the ultrasonic wave
