@@ -363,7 +363,7 @@ void serialCheck()
         TheCommands[0] = AllValues.substring(0,TheSeporator + 1);
         TheCommands[1] = AllValues.substring(TheSeporator, AllValues.length());
         Serial.print(TheCommands[0] + " " + TheCommands[1]);
-        alexaRun(TheCommands[0], "", TheCommands[1].toInt());
+        alexaRun(TheCommands[0], "", ((int)TheCommands[1]));
         
       }
     }
