@@ -428,34 +428,42 @@ void DistinceCheck()
 //New Methoud for alexa to use
 
 void alexaRun(String device, String direction,int degree){
-  if(device == "forward"){
-      RunMotor(120,10);
-      
+  bool hasReadData = false;
+  if (device == "forward")
+  {
+      RunMotor(120, 10);
+      hasReadData = true;
       }
       else if(device == "backward"){
         RunMotor(10,120);
-        
+        hasReadData = true;
       }
       else if(device == "stop"){
         StopMotor();
+        hasReadData = true;
       }
       else if(device == "rightarm"){
         myServos[2].write(degree);
-        
+        hasReadData = true;
       }
       else if(device == "leftarm"){
         myServos[8].write(degree);
-        
+        hasReadData = true;
       }
       else if(device == "rightshoulder"){
         myServos[9].write(degree);
-        
+        hasReadData = true;
       }
       else if(device == "leftshoulder"){
         myServos[7].write(degree);
-        
+        hasReadData = true;
       }
-      Serial.print("I have moved " + device + " " + degree + " degrees");
+      if(hasReadData){
+        Serial.print("I have moved " + device + " " + degree + " degrees");
+      }
+      else{
+        Serial.print("Bad data has been received");
+      }
 }
 
 // SonarSensor function used to generate and read the ultrasonic wave

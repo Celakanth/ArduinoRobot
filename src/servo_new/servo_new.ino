@@ -352,7 +352,7 @@ void serialCheck()
       Serial.println("In coby actions");
       AllValues = Serial.readString();
       //AllValues = AllValues + ReadingByte;
-      Serial.print(AllValues);
+      Serial.println(AllValues);
       if(AllValues == "exit"){
         AlexaInUse = false;
         Serial.println("Coby is deactive");
@@ -362,9 +362,9 @@ void serialCheck()
         String TheDevice = "";
         int TheDegrees = 0;
         TheDevice = AllValues.substring(0,TheSeporator);
-        Serial.println("read degrees " + AllValues.substring(TheSeporator + 1, AllValues.length()));
+       // Serial.println("read degrees " + AllValues.substring(TheSeporator + 1, AllValues.length()));
         TheDegrees = AllValues.substring((TheSeporator + 1), AllValues.length()).toInt();
-        Serial.print("This is the device: " + TheDevice + " The angle: " + String(TheDegrees));
+        //Serial.print("This is the device: " + TheDevice + " The angle: " + String(TheDegrees));
         alexaRun(TheDevice, "", TheDegrees);
         
       }
@@ -428,36 +428,43 @@ void DistinceCheck()
 //New Methoud for alexa to use
 
 void alexaRun(String device, String direction,int degree){
-  if(device == "forward"){
-      RunMotor(120,10);
-      
+  bool hasReadData = false;
+  if (device == "forward")
+  {
+      RunMotor(120, 10);
+      hasReadData = true;
       }
       else if(device == "backward"){
         RunMotor(10,120);
-        
+        hasReadData = true;
       }
       else if(device == "stop"){
         StopMotor();
+        hasReadData = true;
       }
       else if(device == "rightarm"){
         myServos[2].write(degree);
-        
+        hasReadData = true;
       }
       else if(device == "leftarm"){
         myServos[8].write(degree);
-        
+        hasReadData = true;
       }
       else if(device == "rightshoulder"){
         myServos[9].write(degree);
-        
+        hasReadData = true;
       }
       else if(device == "leftshoulder"){
         myServos[7].write(degree);
-        
+        hasReadData = true;
+      }
+      if(hasReadData){
+        Serial.print("I have moved " + device + " " + degree + " degrees");
+      }
+      else{
+        Serial.print("Bad data has been received");
       }
 }
-
-
 
 // SonarSensor function used to generate and read the ultrasonic wave
 void SonarSensor(int trigPinSensor, int echoPinSensor) //it takes the trigPIN and the echoPIN
