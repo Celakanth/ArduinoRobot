@@ -361,8 +361,8 @@ void serialCheck()
        int TheSeporator = AllValues.indexOf("|");
         String TheDevice = "";
         int TheDegrees = 0;
-        TheDevice = AllValues.substring(0,TheSeporator + 1);
-        TheDegrees = AllValues.substring(TheSeporator, AllValues.length()).toInt();
+        TheDevice = AllValues.substring(0,TheSeporator);
+        TheDegrees = AllValues.substring(TheSeporator-1, AllValues.length()).toInt();
         Serial.print("This is the device: " + TheDevice + " The angle: " + String(TheDegrees));
         alexaRun(TheDevice, "", TheDegrees);
         
